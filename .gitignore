@@ -6,4 +6,5 @@ contract/dist
 node_modules
 client/node_modules
 contract/node_modules
+contract/bundle/bundle.zip
 
