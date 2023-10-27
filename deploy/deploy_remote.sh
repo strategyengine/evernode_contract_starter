@@ -20,7 +20,7 @@ evdevkit bundle contract/ $EV_CLIENT_BUNDLE_PUBKEY /usr/bin/node -a dist/index.j
 ECHO 'evdevkit bundle complete'
 
 #rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw is the nftstitches.com evernode host. You can remove this -h param if you like
-EV_CLIENT_CNX_PARAMS=$(evdevkit acquire-and-deploy contract /usr/bin/node -a ../dist/index.js -h 'rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw')
+EV_CLIENT_CNX_PARAMS=$(evdevkit acquire-and-deploy $(pwd)/contract /usr/bin/node -a $(pwd)/dist/index.js -h 'rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw')
 
 
 echo "EV_CLIENT_CNX_PARAMS: $EV_CLIENT_CNX_PARAMS"
