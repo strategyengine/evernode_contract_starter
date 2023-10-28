@@ -19,9 +19,11 @@ evdevkit bundle contract/ $EV_CLIENT_BUNDLE_PUBKEY /usr/bin/node -a dist/index.j
 
 ECHO 'evdevkit bundle complete'
 
-#rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw is the nftstitches.com evernode host. You can remove this -h param if you like
-EV_CLIENT_CNX_PARAMS=$(evdevkit acquire-and-deploy $(pwd)/contract /usr/bin/node -a $(pwd)/dist/index.js -h 'rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw')
 
+#rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw is the nftstitches.com evernode host. You can remove this -h param if you like
+#EV_CLIENT_CNX_PARAMS=$(evdevkit acquire-and-deploy contract /usr/bin/node -a dist/index.js -h 'rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw')
+
+EV_CLIENT_CNX_PARAMS=$(evdevkit acquire -h 'rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw')
 
 echo "EV_CLIENT_CNX_PARAMS: $EV_CLIENT_CNX_PARAMS"
 
@@ -31,6 +33,12 @@ EV_CLIENT_PUBKEY=$(echo "$EV_CLIENT_CNX_PARAMS" | grep -oP "pubkey:\s*'([^']*)'"
 EV_CLIENT_PORT=$(echo "$EV_CLIENT_CNX_PARAMS" | grep -oP "user_port:\s*'([^']*)'" | sed "s/user_port: '//" | tr -d "'")
 
 EV_CLIENT_DOMAIN=$(echo "$EV_CLIENT_CNX_PARAMS" | grep -oP "domain:\s*'([^']*)'" | sed "s/domain: '//" | tr -d "'")
+
+EV_BINARY_PATH=$(pwd)/bundle/bundle.zip
+
+echo "Binary path: $EV_BINARY_PATH"
+
+evdevkit deploy $EV_BINARY_PATH $EV_CLIENT_DOMAIN $EV_CLIENT_PORT
 
 # Construct the EV_CLIENT_CONNECTION variable
 EV_CLIENT_CONNECTION="wss://${EV_CLIENT_DOMAIN}:${EV_CLIENT_PORT}"
