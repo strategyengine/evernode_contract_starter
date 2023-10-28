@@ -15,15 +15,14 @@ npm install
 
 ECHO 'npm install complete'
 
-evdevkit bundle contract/ $EV_CLIENT_BUNDLE_PUBKEY /usr/bin/node -a dist/index.js
-
+#Acquire connection to evernode host, bundle and deploy.  rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw is the nftstitches.com evernode host. You can remove this -h param if you like
+evdevkit bundle . $EV_CLIENT_BUNDLE_PUBKEY /usr/bin/node -a dist/index.js
 ECHO 'evdevkit bundle complete'
-
-
-#rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw is the nftstitches.com evernode host. You can remove this -h param if you like
-#EV_CLIENT_CNX_PARAMS=$(evdevkit acquire-and-deploy contract /usr/bin/node -a dist/index.js -h 'rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw')
-
 EV_CLIENT_CNX_PARAMS=$(evdevkit acquire -h 'rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw')
+cd ..
+evdevkit deploy ../bundle/bundle.zip $EV_CLIENT_DOMAIN $EV_CLIENT_PORT
+
+
 
 echo "EV_CLIENT_CNX_PARAMS: $EV_CLIENT_CNX_PARAMS"
 
@@ -34,11 +33,6 @@ EV_CLIENT_PORT=$(echo "$EV_CLIENT_CNX_PARAMS" | grep -oP "user_port:\s*'([^']*)'
 
 EV_CLIENT_DOMAIN=$(echo "$EV_CLIENT_CNX_PARAMS" | grep -oP "domain:\s*'([^']*)'" | sed "s/domain: '//" | tr -d "'")
 
-EV_BINARY_PATH=$(pwd)/bundle/bundle.zip
-
-echo "Binary path: $EV_BINARY_PATH"
-
-evdevkit deploy $EV_BINARY_PATH $EV_CLIENT_DOMAIN $EV_CLIENT_PORT
 
 # Construct the EV_CLIENT_CONNECTION variable
 EV_CLIENT_CONNECTION="wss://${EV_CLIENT_DOMAIN}:${EV_CLIENT_PORT}"
@@ -52,7 +46,7 @@ export EV_CLIENT_PUBKEY
 
 
 ## start the client
-cd ../client
+cd client
 npm install
 
 node my_client.js
