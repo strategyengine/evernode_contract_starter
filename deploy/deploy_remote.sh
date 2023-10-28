@@ -19,12 +19,10 @@ ECHO 'npm install complete'
 evdevkit bundle . $EV_CLIENT_BUNDLE_PUBKEY /usr/bin/node -a dist/index.js
 ECHO 'evdevkit bundle complete'
 EV_CLIENT_CNX_PARAMS=$(evdevkit acquire -h 'rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw')
+#uncomment for random host
+#EV_CLIENT_CNX_PARAMS=$(evdevkit acquire)
 cd ..
-evdevkit deploy ../bundle/bundle.zip $EV_CLIENT_DOMAIN $EV_CLIENT_PORT
 
-
-
-echo "EV_CLIENT_CNX_PARAMS: $EV_CLIENT_CNX_PARAMS"
 
 # Use grep with regular expressions to extract the values
 EV_CLIENT_PUBKEY=$(echo "$EV_CLIENT_CNX_PARAMS" | grep -oP "pubkey:\s*'([^']*)'" | sed "s/pubkey: '//" | tr -d "'" )
@@ -34,11 +32,20 @@ EV_CLIENT_PORT=$(echo "$EV_CLIENT_CNX_PARAMS" | grep -oP "user_port:\s*'([^']*)'
 EV_CLIENT_DOMAIN=$(echo "$EV_CLIENT_CNX_PARAMS" | grep -oP "domain:\s*'([^']*)'" | sed "s/domain: '//" | tr -d "'")
 
 
+echo "EV_CLIENT_CNX_PARAMS: $EV_CLIENT_CNX_PARAMS"
 # Construct the EV_CLIENT_CONNECTION variable
 EV_CLIENT_CONNECTION="wss://${EV_CLIENT_DOMAIN}:${EV_CLIENT_PORT}"
 
 echo "EV_CLIENT_CONNECTION: $EV_CLIENT_CONNECTION"
 echo "EV_CLIENT_PUBKEY: $EV_CLIENT_PUBKEY"
+
+
+echo "Deploying bundle/bundle.zip to $EV_CLIENT_DOMAIN $EV_CLIENT_PORT"
+evdevkit deploy bundle/bundle.zip $EV_CLIENT_DOMAIN $EV_CLIENT_PORT
+echo "Deployment bundle/bundle.zip complete"
+
+
+
 
 # Export the variables
 export EV_CLIENT_CONNECTION
