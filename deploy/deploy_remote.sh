@@ -21,7 +21,6 @@ ECHO 'evdevkit bundle complete'
 EV_CLIENT_CNX_PARAMS=$(evdevkit acquire -h 'rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw')
 #uncomment for random host
 #EV_CLIENT_CNX_PARAMS=$(evdevkit acquire)
-cd ..
 
 
 # Use grep with regular expressions to extract the values
@@ -39,10 +38,11 @@ EV_CLIENT_CONNECTION="wss://${EV_CLIENT_DOMAIN}:${EV_CLIENT_PORT}"
 echo "EV_CLIENT_CONNECTION: $EV_CLIENT_CONNECTION"
 echo "EV_CLIENT_PUBKEY: $EV_CLIENT_PUBKEY"
 
-
-echo "Deploying bundle/bundle.zip to $EV_CLIENT_DOMAIN $EV_CLIENT_PORT"
-evdevkit deploy bundle/bundle.zip $EV_CLIENT_DOMAIN $EV_CLIENT_PORT
-echo "Deployment bundle/bundle.zip complete"
+cd ../bundle
+echo "$(ls)"
+echo "Deploying bundle.zip to $EV_CLIENT_DOMAIN $EV_CLIENT_PORT"
+evdevkit deploy bundle.zip $EV_CLIENT_DOMAIN $EV_CLIENT_PORT
+echo "Deployment bundle.zip complete"
 
 
 
@@ -53,7 +53,7 @@ export EV_CLIENT_PUBKEY
 
 
 ## start the client
-cd client
+cd ../client
 npm install
 
 node my_client.js
