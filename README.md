@@ -1,7 +1,9 @@
 # This project has a simple evernode contract and simple client that will call the contract.
 
 # Before you start
- you'll need node installed then install the hotpocket and evernode dev kits:
+ - Install node (https://nodejs.org/en/download)
+ - Install docker (https://www.docker.com/get-started/)
+ Then install the hotpocket and evernode dev kits:
 - npm i hpdevkit -g
 - npm i evdevkit -g
 
