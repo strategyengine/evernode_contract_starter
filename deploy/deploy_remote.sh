@@ -8,16 +8,16 @@ echo "Config path: $EV_INSTANCE_CONFIG_PATH"
 
 EV_CLIENT_BUNDLE_PUBKEY=$(evdevkit acquire -h 'rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw' | grep -E "pubkey:" | awk '{print $2}' | tr -d "',")
 
-ECHO "evdevkit acquire pubkey: $EV_CLIENT_BUNDLE_PUBKEY"
+echo "evdevkit acquire pubkey: $EV_CLIENT_BUNDLE_PUBKEY"
 
 cd ../contract
 npm install
 
-ECHO 'npm install complete'
+echo 'npm install complete'
 
 #Acquire connection to evernode host, bundle and deploy.  rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw is the nftstitches.com evernode host. You can remove this -h param if you like
 evdevkit bundle . $EV_CLIENT_BUNDLE_PUBKEY /usr/bin/node -a dist/index.js
-ECHO 'evdevkit bundle complete'
+echo 'evdevkit bundle complete'
 EV_CLIENT_CNX_PARAMS=$(evdevkit acquire -h 'rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw')
 #uncomment for random host
 #EV_CLIENT_CNX_PARAMS=$(evdevkit acquire)
