@@ -6,15 +6,12 @@ export EV_INSTANCE_CONFIG_PATH="$(pwd)/hp.cfg"
 
 echo "Config path: $EV_INSTANCE_CONFIG_PATH"
 
-#EV_CLIENT_BUNDLE_PUBKEY=$(evdevkit acquire -h 'rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw' | grep -E "pubkey:" | awk '{print $2}' | tr -d "',")
-
-#echo "evdevkit acquire pubkey: $EV_CLIENT_BUNDLE_PUBKEY"
-
 cd ../contract
 npm install
 
 echo 'npm install complete'
 
+#Acquire connection to evernode host, bundle and deploy.  rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw is the nftstitches.com evernode host. You can remove this -h param if you like
 EV_CLIENT_CNX_PARAMS=$(evdevkit acquire -h 'rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw')
 #uncomment for random host
 #EV_CLIENT_CNX_PARAMS=$(evdevkit acquire)
@@ -28,8 +25,6 @@ EV_CLIENT_PORT=$(echo "$EV_CLIENT_CNX_PARAMS" | grep -oP "user_port:\s*'([^']*)'
 EV_CLIENT_DOMAIN=$(echo "$EV_CLIENT_CNX_PARAMS" | grep -oP "domain:\s*'([^']*)'" | sed "s/domain: '//" | tr -d "'")
 
 
-
-#Acquire connection to evernode host, bundle and deploy.  rELmLu8zDrY6ts4PLNwtvjHjgE8QCkXmhw is the nftstitches.com evernode host. You can remove this -h param if you like
 evdevkit bundle . $EV_CLIENT_PUBKEY /usr/bin/node -a dist/index.js
 echo 'evdevkit bundle complete'
 
