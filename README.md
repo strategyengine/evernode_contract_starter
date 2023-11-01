@@ -78,3 +78,4 @@ so the environment variables are set with the windows syntax.  For example
 $env:EV_TENANT_SECRET='ssJjfgyqSer5Vmzb4YfhFdEtAX4Ve'
 
 
+When you make changes to your contract code, you will need to run npm start in the contract directory which will update the dist/index.js with your new code.
