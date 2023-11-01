@@ -7,8 +7,8 @@ async function clientApp() {
 
     var cnx = process.env.EV_CLIENT_CONNECTION;
 
-    if(!cnx){
-        cnx = "wss://nftstitches.com:26220"
+    if (!cnx) {
+        cnx = "wss://localhost:8081"
     }
 
     const client = await HotPocket.createClient([cnx], userKeyPair);

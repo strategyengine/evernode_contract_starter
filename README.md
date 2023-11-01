@@ -1,26 +1,31 @@
-# This project has a simple evernode contract and simple client that will call the contract.
+# Project Overview
+This project includes a simple Evernode contract and a client that interacts with the contract.
 
-# Before you start
- - Install node (https://nodejs.org/en/download)
- - Install docker (https://www.docker.com/get-started/)
- Then install the hotpocket and evernode dev kits:
-- npm i hpdevkit -g
-- npm i evdevkit -g
+## Prerequisites
+Before you start, ensure you have the following installed:
+- [Node.js](https://nodejs.org/en/download)
+- [Docker](https://www.docker.com/get-started/)
 
+After installing Node.js and Docker, install the HotPocket and Evernode development kits using the following commands:
+```bash
+npm i hpdevkit -g
+npm i evdevkit -g
 
-# Steps
+## Running the Project Locally
+To run the contract and client locally, execute the following commands in two different terminals. Ensure the contract starts logging before launching the client:
 
-To run the contract and client locally run these in two different terminals.  Wait for the contract to start logging before launching the client 
-
-- deploy/deploy_local.sh 
-- client/start_local.sh 
-
-
-To deploy your contract to hosted servers run this.  It will bundle and deploy the contract to the nftstiches.com evernode host and then launch a client to send a hello message to it
-
-- deploy/deploy_remote.sh
+./deploy/deploy_local.sh 
+./client/start_local.sh 
 
 
+## Deploying the Contract to Hosted Servers
+
+To deploy your contract to hosted servers, run the following command. This will bundle and deploy the contract to the nftstiches.com Evernode host and then launch a client to send a hello message to it:
+
+./deploy/deploy_remote.sh
+
+
+## Note
 
 The keys in this project are all test keys.
 

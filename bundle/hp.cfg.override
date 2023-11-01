@@ -1,0 +1,12 @@
+{
+    "contract": {
+        "unl": [
+            "ed3d87a0b0a2aca959e3f2493df2de388509eb2ee1fb4d30afb22d3d6bbdf82f5c"
+        ],
+        "bin_path": "C:/Program Files/Git/usr/bin/node",
+        "bin_args": "dist/index.js"
+    },
+    "mesh": {
+        "known_peers": []
+    }
+}
